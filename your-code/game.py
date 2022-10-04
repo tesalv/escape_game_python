@@ -1,12 +1,22 @@
 # define rooms and items
 
-couch = {
-    "name": "couch",
-    "type": "furniture",
-}
-
 door_a = {
     "name": "door a",
+    "type": "door",
+}
+
+door_b = {
+    "name": "door b",
+    "type": "door",
+}
+
+door_c = {
+    "name": "door c",
+    "type": "door",
+}
+
+door_d = {
+    "name": "door d",
     "type": "door",
 }
 
@@ -16,8 +26,51 @@ key_a = {
     "target": door_a,
 }
 
+key_b = {
+    "name": "key for door b",
+    "type": "key",
+    "target": door_b,
+}
+
+key_c = {
+    "name": "key for door c",
+    "type": "key",
+    "target": door_c,
+}
+
+key_d = {
+    "name": "key for door d",
+    "type": "key",
+    "target": door_d,
+}
+
 piano = {
     "name": "piano",
+    "type": "furniture",
+}
+
+couch = {
+    "name": "couch",
+    "type": "furniture",
+}
+
+queen_bed = {
+    "name": "queen bed",
+    "type": "furniture",
+}
+
+double_bed = {
+    "name": "double bed",
+    "type": "furniture",
+}
+
+dresser = {
+    "name": "dresser",
+    "type": "furniture",
+}
+
+dinning_table = {
+    "name": "dinning table",
     "type": "furniture",
 }
 
@@ -26,21 +79,46 @@ game_room = {
     "type": "room",
 }
 
+bedroom1 = {
+    "name": "bedroom 1",
+    "type": "room",
+}
+
+bedroom2 = {
+    "name": "bedroom 2",
+    "type": "room",
+}
+
+living_room = {
+    "name": "living room",
+    "type": "room",
+}
+
+
 outside = {
   "name": "outside"
 }
 
-all_rooms = [game_room, outside]
+all_rooms = [game_room, bedroom1,bedroom2,living_room,outside]
 
-all_doors = [door_a]
+all_doors = [door_a,door_b,door_c,door_d]
 
 # define which items/rooms are related
 
 object_relations = {
     "game room": [couch, piano, door_a],
+    "bedroom 1": [queen_bed,door_a, door_b, door_c],
+    "bedroom 2": [double_bed,dresser, door_b],
+    "living room": [dinning_table,door_d, door_c],
+    "outside": [door_d],
     "piano": [key_a],
-    "outside": [door_a],
-    "door a": [game_room, outside]
+    "queen bed":[key_b],
+    "double bed":[key_c],
+    "dresser":[key_d],
+    "door a": [game_room, bedroom1],
+    "door b": [bedroom2, bedroom1],
+    "door c": [living_room, bedroom1],
+    "door d": [outside, living_room]
 }
 
 # define game state. Do not directly change this dict. 
@@ -77,14 +155,14 @@ def play_room(room):
         print("Congrats! You escaped the room!")
     else:
         print("You are now in " + room["name"])
-        intended_action = input("What would you like to do? Type 'explore' or 'examine'?").strip()
-        if intended_action == "explore":
+        intended_action = input("What would you like to do? Type 'a' to explore the room or 'b' to examine the objects in the room?").strip()
+        if intended_action == "a":
             explore_room(room)
             play_room(room)
-        elif intended_action == "examine":
-            examine_item(input("What would you like to examine?").strip())
+        elif intended_action == "b":
+            examine_item(input("What object would you like to examine?").strip())
         else:
-            print("Not sure what you mean. Type 'explore' or 'examine'.")
+            print("Not sure what you mean. Type 'a' to explore the room or 'b' to examine the objects in the room?")
             play_room(room)
         linebreak()
 
@@ -146,7 +224,7 @@ def examine_item(item_name):
     if(output is None):
         print("The item you requested is not found in the current room.")
     
-    if(next_room and input("Do you want to go to the next room? Ener 'yes' or 'no'").strip() == 'yes'):
+    if(next_room and input("Do you want to go to the next room? Enter 'yes' or 'no'").strip() == 'yes'):
         play_room(next_room)
     else:
         play_room(current_room)
