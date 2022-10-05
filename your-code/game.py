@@ -220,7 +220,7 @@ def examine_item(item_name):
                 print("You're looking at the musical picture. Pay attention! It has 6 objects portraited: Giant, Aligator, Ant, Dice, Car, Fan")
                 output=output.replace("You examine " + item_name + ". ","")
                 #output=None
-
+            
             elif item["name"] == "piano":
                 playtime= True
                 while playtime== True:
@@ -244,7 +244,10 @@ def examine_item(item_name):
                         else: 
                             continue
 
-
+            elif item["name"] == "dresser":
+                game_to_open_dresser() 
+                item_found = object_relations[item["name"]].pop()
+                game_state["keys_collected"].append(item_found)               
             
             else:
                 if(item["name"] in object_relations and len(object_relations[item["name"]])>0):
@@ -255,7 +258,7 @@ def examine_item(item_name):
                     output += "There isn't anything interesting about it."
             if output!= "":
                 print(output)
-            break
+                break
 
     if(output is None):
         print("The item you requested is not found in the current room.")
@@ -265,5 +268,52 @@ def examine_item(item_name):
     else:
         play_room(current_room)
 game_state = INIT_GAME_STATE.copy()
+
+
+def game_to_open_dresser():
+    """ 3 games that has to be solved in order to open the dresser. """
+    
+    total_wins = 0
+
+    print("In order to open the dresser you have to give 3 correct answers. Good luck! The clock is ticking!")
+
+    Flag = True
+    while Flag == True:
+        result1 = input("Solve 5 + 88: ")
+        if (result1.isdigit() == True) and (int(result1) == 93):
+            total_wins += 1
+            print("Very good! Let's see if you crack the next one")
+            Flag = False
+        elif result1.isdigit() == False:
+            print("You have to give me numbers. Try Again")
+            Flag = True
+        else:
+            print("No... Better luck next time! Let's try again!" )
+            Flag = True
+    
+    Flag = True
+    while Flag == True:
+        result2 = input("Which sea creature has three hearts?: ")
+        if result2.lower() == "octopus":
+            total_wins += 1
+            print("You are rocking!")
+            Flag = False
+        else:
+            print("Ups... Let's try again!")
+            Flag = True
+    
+    Flag = True
+    while Flag == True:
+        result3 = input("if you freeze water what you get?: ")
+        if result3.lower() == "ice":
+            total_wins += 1
+            print('You rock it! Great!')
+            Flag = False
+            if total_wins == 3:
+                print("Yeah! You've just solved 3 challenges! Now you have found the key of the door D")
+                break
+        else:
+            print("Nop... Try again!")
+            Flag = True
 
 start_game()
