@@ -231,3 +231,5 @@ def examine_item(item_name):
 game_state = INIT_GAME_STATE.copy()
 
 start_game()
+def val():
+    return "Hello Ines"
