@@ -218,7 +218,9 @@ def examine_item(item_name):
                     output += "It is locked but you don't have the key."
             elif item["name"] == "musical picture":
                 print("You're looking at the musical picture. Pay attention! It has 6 objects portraited: Giant, Aligator, Ant, Dice, Car, Fan")
-            
+                output=output.replace("You examine " + item_name + ". ","")
+                #output=None
+
             elif item["name"] == "piano":
                 playtime= True
                 while playtime== True:
@@ -228,11 +230,15 @@ def examine_item(item_name):
                         print("You're a musical genius! Wait, something was revealed.")
                         item_found = object_relations[item["name"]].pop()
                         game_state["keys_collected"].append(item_found)
-                        print("You find key foor door a")
+                        print("You find key foor door a.")
+                        output=output.replace("You examine " + item_name + ". ","")
+                        #output=None
                         playtime= False
                     else:
                         print("That is not a great song, please try again. Remember the musical notes are: A B C D E F G. Maybe explore the room for inspiration \n")
                         another_try=input("Do you want to try again? Yes or No?")
+                        output=output.replace("You examine " + item_name + ". ","")
+                        #output=None
                         if another_try.upper()== "NO":
                             playtime=False
                         else: 
@@ -247,7 +253,8 @@ def examine_item(item_name):
                     output += "You find " + item_found["name"] + "."
                 else:
                     output += "There isn't anything interesting about it."
-            print(output)
+            if output!= "":
+                print(output)
             break
 
     if(output is None):
