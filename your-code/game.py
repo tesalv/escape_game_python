@@ -131,6 +131,10 @@ INIT_GAME_STATE = {
     "keys_collected": [],
     "target_room": outside
 }
+
+def teresaadd_on():
+    print("foi este o addon")
+    
 def linebreak():
     """
     Print a line break
