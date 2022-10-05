@@ -74,6 +74,11 @@ dinning_table = {
     "type": "furniture",
 }
 
+musical_picture = {
+    "name": "musical picture",
+    "type": "furniture",
+}
+
 game_room = {
     "name": "game room",
     "type": "room",
@@ -106,7 +111,7 @@ all_doors = [door_a,door_b,door_c,door_d]
 # define which items/rooms are related
 
 object_relations = {
-    "game room": [couch, piano, door_a],
+    "game room": [couch, piano, door_a,musical_picture],
     "bedroom 1": [queen_bed,door_a, door_b, door_c],
     "bedroom 2": [double_bed,dresser, door_b],
     "living room": [dinning_table,door_d, door_c],
@@ -211,6 +216,30 @@ def examine_item(item_name):
                     next_room = get_next_room_of_door(item, current_room)
                 else:
                     output += "It is locked but you don't have the key."
+            elif item["name"] == "musical picture":
+                print("You're looking at the musical picture. Pay attention! It has 6 objects portraited: Giant, Aligator, Ant, Dice, Car, Fan")
+            
+            elif item["name"] == "piano":
+                playtime= True
+                while playtime== True:
+                    print("You're facing the piano, please sit and play something.")
+                    song_played=input("Can you play a 6 note song? ").replace(" ","")
+                    if song_played.upper()=="GAADCF":
+                        print("You're a musical genius! Wait, something was revealed.")
+                        item_found = object_relations[item["name"]].pop()
+                        game_state["keys_collected"].append(item_found)
+                        print("You find key foor door a")
+                        playtime= False
+                    else:
+                        print("That is not a great song, please try again. Remember the musical notes are: A B C D E F G. Maybe explore the room for inspiration \n")
+                        another_try=input("Do you want to try again? Yes or No?")
+                        if another_try.upper()== "NO":
+                            playtime=False
+                        else: 
+                            continue
+
+
+            
             else:
                 if(item["name"] in object_relations and len(object_relations[item["name"]])>0):
                     item_found = object_relations[item["name"]].pop()
@@ -231,5 +260,3 @@ def examine_item(item_name):
 game_state = INIT_GAME_STATE.copy()
 
 start_game()
-
-
