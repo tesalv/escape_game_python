@@ -1,129 +1,133 @@
+import tkinter as tk
+import os, time
+from threading import Thread
+
 # define rooms and items
 
-door_a = {
-    "name": "door a",
-    "type": "door",
+gate_a = {
+    "name": "gate a",
+    "type": "gate",
 }
 
-door_b = {
-    "name": "door b",
-    "type": "door",
+gate_b = {
+    "name": "gate b",
+    "type": "gate",
 }
 
-door_c = {
-    "name": "door c",
-    "type": "door",
+gate_c = {
+    "name": "gate c",
+    "type": "gate",
 }
 
-door_d = {
-    "name": "door d",
-    "type": "door",
+gate_d = {
+    "name": "gate d",
+    "type": "gate",
 }
 
-key_a = {
-    "name": "key for door a",
+boarding_ticket_a = {
+    "name": "boarding ticket for gate a",
     "type": "key",
-    "target": door_a,
+    "target": gate_a,
 }
 
-key_b = {
-    "name": "key for door b",
+boarding_ticket_b = {
+    "name": "boarding ticket for gate b",
     "type": "key",
-    "target": door_b,
+    "target": gate_b,
 }
 
-key_c = {
-    "name": "key for door c",
+boarding_ticket_c = {
+    "name": "boarding ticket for gate c",
     "type": "key",
-    "target": door_c,
+    "target": gate_c,
 }
 
-key_d = {
-    "name": "key for door d",
+boarding_ticket_d = {
+    "name": "boarding ticket for gate d",
     "type": "key",
-    "target": door_d,
+    "target": gate_d,
 }
 
 piano = {
     "name": "piano",
-    "type": "furniture",
+    "type": "monument",
 }
 
-couch = {
-    "name": "couch",
-    "type": "furniture",
+st_stephens_cathedral = {
+    "name": "cathedral",
+    "type": "monument",
 }
 
-queen_bed = {
-    "name": "queen bed",
-    "type": "furniture",
+chichen_itza = {
+    "name": "chichen itza",
+    "type": "monument",
 }
 
-double_bed = {
-    "name": "double bed",
-    "type": "furniture",
+ganges = {
+    "name": "ganges",
+    "type": "monument",
 }
 
-dresser = {
-    "name": "dresser",
-    "type": "furniture",
+taj_mahal = {
+    "name": "taj mahal",
+    "type": "monument",
 }
 
-dinning_table = {
-    "name": "dinning table",
-    "type": "furniture",
+great_wall = {
+    "name": "great wall",
+    "type": "monument",
 }
 
-musical_picture = {
-    "name": "musical picture",
-    "type": "furniture",
+musical_painting = {
+    "name": "musical painting",
+    "type": "monument",
 }
 
-game_room = {
-    "name": "game room",
+austria = {
+    "name": "Austria",
     "type": "room",
 }
 
-bedroom1 = {
-    "name": "bedroom 1",
+mexico = {
+    "name": "Mexico",
     "type": "room",
 }
 
-bedroom2 = {
-    "name": "bedroom 2",
+india = {
+    "name": "India",
     "type": "room",
 }
 
-living_room = {
-    "name": "living room",
+china = {
+    "name": "China",
     "type": "room",
 }
 
 
-outside = {
-  "name": "outside"
+maldives = {
+  "name": "Maldives"
 }
 
-all_rooms = [game_room, bedroom1,bedroom2,living_room,outside]
+all_rooms = [austria, mexico,india,china,maldives]
 
-all_doors = [door_a,door_b,door_c,door_d]
+all_gates = [gate_a,gate_b,gate_c,gate_d]
 
 # define which items/rooms are related
 
 object_relations = {
-    "game room": [couch, piano, door_a,musical_picture],
-    "bedroom 1": [queen_bed,door_a, door_b, door_c],
-    "bedroom 2": [double_bed,dresser, door_b],
-    "living room": [dinning_table,door_d, door_c],
-    "outside": [door_d],
-    "piano": [key_a],
-    "queen bed":[key_b],
-    "double bed":[key_c],
-    "dresser":[key_d],
-    "door a": [game_room, bedroom1],
-    "door b": [bedroom2, bedroom1],
-    "door c": [living_room, bedroom1],
-    "door d": [outside, living_room]
+    "Austria": [st_stephens_cathedral, piano, gate_a,musical_painting],
+    "Mexico": [chichen_itza,gate_a, gate_b, gate_c],
+    "India": [ganges,taj_mahal, gate_b],
+    "China": [great_wall,gate_d, gate_c],
+    "Maldives": [gate_d],
+    "piano": [boarding_ticket_a],
+    "chichen itza":[boarding_ticket_b],
+    "ganges":[boarding_ticket_c],
+    "taj mahal":[boarding_ticket_d],
+    "gate a": [austria, mexico],
+    "gate b": [india, mexico],
+    "gate c": [china, mexico],
+    "gate d": [maldives, china]
 }
 
 # define game state. Do not directly change this dict. 
@@ -132,21 +136,21 @@ object_relations = {
 # way you can replay the game multiple times.
 
 INIT_GAME_STATE = {
-    "current_room": game_room,
+    "current_room": austria,
     "keys_collected": [],
-    "target_room": outside
+    "target_room": maldives
 }
 def linebreak():
     """
     Print a line break
     """
-    print("\n\n")
+    print("\n")
 
 def start_game():
     """
     Start the game
     """
-    print("You wake up on a couch and find yourself in a strange house with no windows which you have never been to before. You don't remember why you are here and what had happened before. You feel some unknown danger is approaching and you must get out of the house, NOW!")
+    print("\n You finally finished your Ironhack bootcamp and decided to take a break. Your holidays were booked in the Maldives but something went wrong. You wake up on a St. Stephen's Cathedral, in Austria. Oh noooo! You want to get out of here and reach your destination. Find your way to paradise. NOW!!")
     play_room(game_state["current_room"])
 
 def play_room(room):
@@ -157,45 +161,47 @@ def play_room(room):
     """
     game_state["current_room"] = room
     if(game_state["current_room"] == game_state["target_room"]):
-        print("Congrats! You escaped the room!")
+        print("Congrats! You arrived in the Maldives! Get yourself and drink and relax in the sun now!")
     else:
         print("You are now in " + room["name"])
-        intended_action = input("What would you like to do? Type 'a' to explore the room or 'b' to examine the objects in the room?").strip()
-        if intended_action == "a":
+        intended_action = input("What would you like to do? Type 'a' to explore the country or 'b' to examine the landmarks/objects?").strip()
+        linebreak()
+        if intended_action.lower() == "a":
             explore_room(room)
             play_room(room)
-        elif intended_action == "b":
-            examine_item(input("What object would you like to examine?").strip())
+        elif intended_action.lower() == "b":
+            examine_item((input("What landmark/object would you like to examine?").strip()))
+            linebreak()
         else:
-            print("Not sure what you mean. Type 'a' to explore the room or 'b' to examine the objects in the room?")
+            print("Not sure what you mean. Type 'a' to explore the country or 'b' to examine the landmarks/objectshe room or 'b' to examine the objects in the room?")
             play_room(room)
-        linebreak()
+        #linebreak()
 
 def explore_room(room):
     """
-    Explore a room. List all items belonging to this room.
+    Explore a country. List all items belonging to this countries.
     """
     items = [i["name"] for i in object_relations[room["name"]]]
-    print("You explore the room. This is " + room["name"] + ". You find " + ", ".join(items))
+    print("You explore the country. This is " + room["name"] + ". You find " + ", ".join(items))
 
-def get_next_room_of_door(door, current_room):
+def get_next_room_of_gate(gate, current_room):
     """
-    From object_relations, find the two rooms connected to the given door.
+    From object_relations, find the two rooms connected to the given gate.
     Return the room that is not the current_room.
     """
-    connected_rooms = object_relations[door["name"]]
+    connected_rooms = object_relations[gate["name"]]
     for room in connected_rooms:
         if(not current_room == room):
             return room
 
 def examine_item(item_name):
     """
-    Examine an item which can be a door or furniture.
+    Examine an item which can be a gate or monument.
     First make sure the intended item belongs to the current room.
-    Then check if the item is a door. Tell player if key hasn't been 
+    Then check if the item is a gate. Tell player if boarding ticket hasn't been 
     collected yet. Otherwise ask player if they want to go to the next
-    room. If the item is not a door, then check if it contains keys.
-    Collect the key if found and update the game state. At the end,
+    room. If the item is not a gate, then check if it contains keys.
+    Collect the boarding ticket if found and update the game state. At the end,
     play either the current or the next room depending on the game state
     to keep playing.
     """
@@ -204,20 +210,20 @@ def examine_item(item_name):
     output = None
     
     for item in object_relations[current_room["name"]]:
-        if(item["name"] == item_name):
+        if (item["name"] == item_name.lower()):
             output = "You examine " + item_name + ". "
-            if(item["type"] == "door"):
-                have_key = False
-                for key in game_state["keys_collected"]:
-                    if(key["target"] == item):
-                        have_key = True
-                if(have_key):
-                    output += "You unlock it with a key you have."
-                    next_room = get_next_room_of_door(item, current_room)
+            if(item["type"] == "gate"):
+                have_boarding_ticket = False
+                for boarding_ticket in game_state["keys_collected"]:
+                    if(boarding_ticket["target"] == item):
+                        have_boarding_ticket = True
+                if(have_boarding_ticket):
+                    output += "You can go throught the gate with the boarding ticket you have."
+                    next_room = get_next_room_of_gate(item, current_room)
                 else:
-                    output += "It is locked but you don't have the key."
-            elif item["name"] == "musical picture":
-                print("You're looking at the musical picture. Pay attention! It has 6 objects portraited: Giant, Aligator, Ant, Dice, Car, Fan")
+                    output += "It is a boarding gate but you don't have a ticket."
+            elif item["name"] == "musical painting":
+                print("You're looking at the musical painting. Pay attention! It has 6 objects portraited: Giant, Aligator, Ant, Dice, Car, Fan")
                 output=output.replace("You examine " + item_name + ". ","")
                 #output=None
             
@@ -226,17 +232,19 @@ def examine_item(item_name):
                 while playtime== True:
                     print("You're facing the piano, please sit and play something.")
                     song_played=input("Can you play a 6 note song? ").replace(" ","")
+                    linebreak()
                     if song_played.upper()=="GAADCF":
                         print("You're a musical genius! Wait, something was revealed.")
                         item_found = object_relations[item["name"]].pop()
                         game_state["keys_collected"].append(item_found)
-                        print("You find key foor door a.")
+                        print("You find boarding ticket foor gate a.")
                         output=output.replace("You examine " + item_name + ". ","")
                         #output=None
                         playtime= False
                     else:
                         print("That is not a great song, please try again. Remember the musical notes are: A B C D E F G. Maybe explore the room for inspiration \n")
                         another_try=input("Do you want to try again? Yes or No?")
+                        linebreak()
                         output=output.replace("You examine " + item_name + ". ","")
                         #output=None
                         if another_try.upper()== "NO":
@@ -244,8 +252,8 @@ def examine_item(item_name):
                         else: 
                             continue
 
-            elif item["name"] == "dresser":
-                game_to_open_dresser() 
+            elif item["name"] == "taj mahal":
+                game_to_open_taj_mahal() 
                 item_found = object_relations[item["name"]].pop()
                 game_state["keys_collected"].append(item_found)               
             
@@ -263,23 +271,26 @@ def examine_item(item_name):
     if(output is None):
         print("The item you requested is not found in the current room.")
     
-    if(next_room and input("Do you want to go to the next room? Enter 'yes' or 'no'").strip() == 'yes'):
+    if(next_room and input("Do you want to go through the boarding gate? Enter 'yes' or 'no'").strip() == 'yes'):
+        linebreak()
         play_room(next_room)
     else:
         play_room(current_room)
-game_state = INIT_GAME_STATE.copy()
 
 
-def game_to_open_dresser():
-    """ 3 games that has to be solved in order to open the dresser. """
+
+
+def game_to_open_taj_mahal():
+    """ 3 games that has to be solved in order to enter the taj mahal. """
     
     total_wins = 0
 
-    print("In order to open the dresser you have to give 3 correct answers. Good luck! The clock is ticking!")
+    print("In order to enter the taj mahal you have to give 3 correct answers. Good luck! The clock is ticking!")
 
     Flag = True
     while Flag == True:
         result1 = input("Solve 5 + 88: ")
+        linebreak()
         if (result1.isdigit() == True) and (int(result1) == 93):
             total_wins += 1
             print("Very good! Let's see if you crack the next one")
@@ -294,6 +305,7 @@ def game_to_open_dresser():
     Flag = True
     while Flag == True:
         result2 = input("Which sea creature has three hearts?: ")
+        linebreak()
         if result2.lower() == "octopus":
             total_wins += 1
             print("You are rocking!")
@@ -305,15 +317,60 @@ def game_to_open_dresser():
     Flag = True
     while Flag == True:
         result3 = input("if you freeze water what you get?: ")
+        linebreak()
         if result3.lower() == "ice":
             total_wins += 1
-            print('You rock it! Great!')
+            print('You are amazing! Great!')
             Flag = False
             if total_wins == 3:
-                print("Yeah! You've just solved 3 challenges! Now you have found the key of the door D")
+                print("Yeah! You've just solved 3 challenges! Now you have found the boarding ticket of the gate D")
                 break
         else:
             print("Nop... Try again!")
             Flag = True
 
-start_game()
+game_state = INIT_GAME_STATE.copy()
+
+root = tk.Tk()
+# set window size
+root.geometry("500x200")
+
+def start_timer(count):
+    label = tk.Label(root)
+    label.place(x=32, y=35)
+    label.config(font=("Courier", 20))
+
+    # change text in label   
+    total_mins = count//60 # minutes left
+    total_sec = count-(60*(total_mins)) #seconds left  
+    if total_sec < 10:
+        total_sec = f"0{total_sec}"
+     
+    label['text'] = '{min}:{sec}'.format(min=total_mins, sec=total_sec)
+
+    if count > 0:
+        # call countdown again after 1000ms (1s)
+        root.after(1000, start_timer, count-1)
+    if count == 0:
+        label['text'] = 'GAME OVER'
+        root.after(1000, start_timer, count-1)
+    if count < 0:
+        label['text'] = 'GAME OVER'
+        time.sleep(2)
+        root.destroy()
+        return False
+
+
+
+if __name__ == '__main__':
+    game = Thread(target= start_game)
+    game.start()
+
+    timer = Thread(target= start_timer, args=(210,))
+    timer.start()
+    root.mainloop()
+
+    timer.join()
+    if timer.is_alive() == False:
+        print("\n you are too slow and missed your flight! game over!")
+        os._exit(0)
