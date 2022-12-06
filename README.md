@@ -4,139 +4,47 @@
 
 ## Overview
 
-This project is the first project of the Ironhack's Data Analytics Bootcamp. The goal of this project is to apply the Python programming skills learned that week in solving a real problem. The design of a classic game that can be played via text - Escape Room is presented and the goal is to develop the game using Python based on the game design.
+This project is the first project of the Ironhack's Data Analytics Bootcamp. The goal of this project is to apply the Python programming skills learned that week in solving a real problem. The initial design of a classic game that can be played via text - Escape Room was presented and the goal was to develop the game using Python based on the game design.
+The game narratives created and the created challenges are described bellow.
 
-Game narratives and technical requirements are given. 
-
----
-
-## ORIGINAL Game Design
-
-### ORIGINAL Game Map
-
-![Game Map](escape-room-plan.jpg)
-
-### ORIGINAL Game Narratives
-
-#### Game Room
-
-You wake up on a couch and find yourself in a strange house with no windows which you have never been to before. You don't remember why you are here and what had happened before. You feel some unknown danger is approaching and you must get out of the house, NOW!
-
-You are now in game room.
-
-What would you like to do?
-
-You explore the room. This is Game Room. You find couch, piano, and Door A.
-
-You examine couch. There isn't anything interesting about it.
-
-You examine Door A. It is locked but you don't have the key.
-
-You examine piano. You find key for Door A.
-
-You examine Door A. Your unlock it with a key you have.
-
-Do you want to go to the next room?
-
-#### Bedroom 1
-
-You are now in Bedroom 1.
-
-What would you like to do?
-
-You explore the room. This is Bedroom 1. You find queen bed, Door A, Door B, and Door C.
-
-You examine queen bed. You find key for Door B.
-
-You examine Door C. It is locked but you don't have the key.
-
-You examine Door B. Your unlock it with a key you have.
-
-Do you want to go to the next room?
-
-#### Bedroom 2
-
-You are now in Bedroom 2.
-
-What would you like to do?
-
-You explore the room. This is Bedroom 2. You find double bed, dresser, and Door B.
-
-You examine double bed. You find key for Door C.
-
-You examine dresser. You find key for Door D.
-
-You examine Door B. Your unlock it with a key you have.
-
-Do you want to go to the next room?
-
-#### Bedroom 1
-
-You are now in Bedroom 1.
-
-What would you like to do?
-
-You examine Door C. Your unlock it with a key you have.
-
-Do you want to go to the next room?
-
-#### Living Room
-
-You are now in Living Room.
-
-What would you like to do?
-
-You explore the room. This is Living Room. You find dining table, Door C, and Door D.
-
-You examine Door D. Your unlock it with a key you have.
-
-Do you want to go to the next room?
-
-#### Outside
-
-Congrats! You escaped the room!
 
 ---
 
-## Getting Started
+## Game Design
 
-Overwhelmed and don't know where to start? This is a tough challenge we know. But don't worry. We have included a working example for you to reference in which only 1 room (game room) is included. Read the example and make sure you understand it. Then you can expand on top of the example to code the rest of the rooms.
+### Game Map
 
-The provided example is just a Minimal Viable Product (MVP). It is fully functional but not bullet proof. You should be aware of its limitations while you are working and try to make your final product as robust as possible.
+![Game Map](new_game_map.jpg)
 
-## Technical Requirements
+### Game Narratives
 
-* Use Python lists and dictionaries to define the rooms, items, and relations of them.
+#### Initial Room
 
-* Use a Python dictionary to store the game state. Update the state dictionary when progresses are made such as a key is collected.
+You finally finished your Ironhack bootcamp and decided to take a break. Your holidays were booked in the Maldives but something went wrong. You wake up on a St. Stephen's Cathedral, in Austria. Oh noooo! You want to get out of here and reach your destination. Find your way to paradise. NOW!!
 
-* Use Python functions to play the game. Don't use procedural code.
-
-* After completing each game action, call the next function to continue playing until the winning condition is reached.
-
-* The winning condition is for the player to successfully make to the "Outside" room. When this happens, congrat the player and end the game.
-
-## Necessary Deliverables
-
-The following deliverables should be pushed to your Github repo.
-
-* `main.ipynb` that contains your solution.
-
-## Suggested Ways to Get Started
-
-1. Start Jupyter Notebook from this lab directory.
-
-1. Launch `sample-code.ipynb` and read through the file. Also execute the code and play the game. Make sure you understand what each line of the codes does.
-
-1. Create `main.ipynb` and copy the codes from `sample-code.ipynb`. Expand the code following the example to create Bedroom 1.
-
-1. Test the game with Game Room and Bedroom 1. Make sure everything works then work on Bedroom 2 then Living Room.
-
-1. Test the whole game. Try to make all kinds of inputs to make sure your game is rock solid and will not break.
+What would you like to do? You can explore the country or examine the landmarks/objects.
 
 
-## PROPOSED NEW MAP GAME
-(new_game_map.jpg)
+## COUNTRIES AND LANDMARKS/OBJECTS/CHALLENGES
+
+ - Austria
+    - Musical picture: image with objects that you need to memorize
+    
+    - Piano: You need to play the notes of the musical picture to be able to acess the ticket to gate A
+
+ - Mexico
+    - Chichen Itza : ticket to boarding gate B
+
+ - India
+    - Taj Mahal: need to solve 3 mathematical games in order to get the ticket to boarding gate C
+    - River Ganges: ticket to boarding gate D
+
+- China
+    - Great Wall of China
+
+ -Maldives: Game over, you won.
+
+The game has a timer and if the person does not finished before the time out , it's game over.
 
 
 ## GAME IMPROVEMENTS
